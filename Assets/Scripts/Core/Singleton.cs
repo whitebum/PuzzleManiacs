@@ -1,46 +1,46 @@
-ï»¿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PuzzleExpress.Core
+namespace PuzzleManiacs.Core
 {
     /// <summary>
-    /// ë‹¤ë¥¸ í´ë˜ìŠ¤ì—ì„œ ì •ì  ì¸ìŠ¤í„´ìŠ¤ ì°¸ì¡°ì˜ í˜•íƒœë¡œ ì‚¬ìš©ë˜ëŠ” ê°ì²´ë“¤ì˜ ê³µí†µ í´ë˜ìŠ¤.
+    /// ´Ù¸¥ Å¬·¡½º¿¡¼­ Á¤Àû ÀÎ½ºÅÏ½º ÂüÁ¶ÀÇ ÇüÅÂ·Î »ç¿ëµÇ´Â °´Ã¼µéÀÇ °øÅë Å¬·¡½º.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         /// <summary>
-        /// í•´ë‹¹ í´ë˜ìŠ¤ë¥¼ ìƒì†ë°›ëŠ” ìì‹ í´ë˜ìŠ¤ì˜ ì •ì  ì¸ìŠ¤í„´ìŠ¤.
+        /// ÇØ´ç Å¬·¡½º¸¦ »ó¼Ó¹Ş´Â ÀÚ½Ä Å¬·¡½ºÀÇ Á¤Àû ÀÎ½ºÅÏ½º.
         /// </summary>
         private static T instance = null;
 
         /// <summary>
-        /// Thread-Safeë¥¼ ìœ„í•œ 
+        /// Thread-Safe¸¦ À§ÇÑ 
         /// </summary>
         private static object locker = new object();
 
         /// <summary>
-        /// í”„ë¡œê·¸ë¨ì˜ ì¢…ë£Œì— ëŒ€í•œ ì—¬ë¶€.
-        /// í”„ë¡œê·¸ë¨ ì¢…ë£Œ ë’¤ì—ë„ ì¸ìŠ¤í„´ìŠ¤ë¥¼ ì°¸ì¡°í•˜ì—¬ ë¶ˆí•„ìš”í•œ ê°ì²´ê°€ ìƒì„±ë˜ëŠ” ê²ƒì„ ë§‰ê¸° ìœ„í•¨ì„.
+        /// ÇÁ·Î±×·¥ÀÇ Á¾·á¿¡ ´ëÇÑ ¿©ºÎ.
+        /// ÇÁ·Î±×·¥ Á¾·á µÚ¿¡µµ ÀÎ½ºÅÏ½º¸¦ ÂüÁ¶ÇÏ¿© ºÒÇÊ¿äÇÑ °´Ã¼°¡ »ı¼ºµÇ´Â °ÍÀ» ¸·±â À§ÇÔÀÓ.
         /// </summary>
         private static bool isApplicationQuit = false;
 
         /// <summary>
-        /// í•´ë‹¹ í´ë˜ìŠ¤ë¥¼ ìƒì†ë°›ëŠ” ìì‹ í´ë˜ìŠ¤ì˜ ì •ì  ì¸ìŠ¤í„´ìŠ¤ Getter.
+        /// ÇØ´ç Å¬·¡½º¸¦ »ó¼Ó¹Ş´Â ÀÚ½Ä Å¬·¡½ºÀÇ Á¤Àû ÀÎ½ºÅÏ½º Getter.
         /// </summary>
         public static T Instance
         {
             get
             {
-                // í”„ë¡œê·¸ë¨ì´ ì¢…ë£Œë˜ì§€ ì•Šì•˜ë‹¤ë©´ ì¸ìŠ¤í„´ìŠ¤ë¥¼ ë°˜í™˜í•œë‹¤.
+                // ÇÁ·Î±×·¥ÀÌ Á¾·áµÇÁö ¾Ê¾Ò´Ù¸é ÀÎ½ºÅÏ½º¸¦ ¹İÈ¯ÇÑ´Ù.
                 if (isApplicationQuit == false)
                 {
                     lock (locker)
                     {
                         instance = instance ?? FindObjectOfType(typeof(T)) as T;
 
-                        // ì¸ìŠ¤í„´ìŠ¤ê°€ í• ë‹¹ë˜ì§€ ì•Šì•˜ë‹¤ë©´, ë°”ë¡œ í• ë‹¹í•œë‹¤.
+                        // ÀÎ½ºÅÏ½º°¡ ÇÒ´çµÇÁö ¾Ê¾Ò´Ù¸é, ¹Ù·Î ÇÒ´çÇÑ´Ù.
                         if (instance == null)
                         {
                             var obj = GameObject.Find(typeof(T).ToString());

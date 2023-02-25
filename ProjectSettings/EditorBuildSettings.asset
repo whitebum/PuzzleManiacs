@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Flip Card.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/Main Title.unity
+    guid: a05cf4abe5caa3a4595490a7883e23df
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 1c05e4193474208448e3ac10ab676aaf
   m_configObjects: {}
